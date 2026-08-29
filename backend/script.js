@@ -1,5 +1,4 @@
 console.log('working...');
-console.log('This is a 10 round game win 6 or more rounds to win the game\nenter exit to stop the game')
 function getComputerChoice(){
     let number=Math.random();
     number=number*100;
@@ -11,59 +10,55 @@ function getComputerChoice(){
         return 'scissor';
     }
 }
-let computerScore=0;
-let playerScore=0;
-let i=1;
-while(i<=10){
-    console.log(`round ${i}`);
-    const playerChoice=prompt('Enter your choice from :\n rock, paper, sicssors');
-    console.log(playerChoice);
-    if(playerChoice=='exit'){
-        break;
-    }
+
+let playerChoice;
+function choseRock(){
+    playerChoice='rock';
+    document.getElementById("playerMove").textContent="You choose rock";
+    play();
+}
+function chosePaper(){
+    playerChoice='paper';
+    document.getElementById("playerMove").textContent="You choose paper";
+    play();
+}
+function choseScissor(){
+    playerChoice='scissor';
+    document.getElementById("playerMove").textContent="You choose scissor";
+    play();
+}
+const rockButton=document.getElementById("rock");
+const paperButton=document.getElementById("paper");
+const scissorButton=document.getElementById("scissor");
+rockButton.addEventListener("click",choseRock);
+paperButton.addEventListener("click",chosePaper);
+scissorButton.addEventListener("click",choseScissor);
+
+function play(){
     const computerChoice=getComputerChoice();
     if(playerChoice=='rock'){
         if(computerChoice=='scissor'){
-            console.log('You won this round');
-            playerScore++;
-        }else if(computerChoice=='paper'){
-            console.log('You lost this round');
-            computerScore++;
+            document.getElementById("result").textContent="you win";
+        }   else if(computerChoice=='paper'){
+            document.getElementById("result").textContent="you lose";
         }else{
-            console.log('it\'s a tie');
+            document.getElementById("result").textContent="it's a tie";
         }
     }else if(playerChoice=='paper'){
         if(computerChoice=='rock'){
-            console.log('You won this round');
-            playerScore++;
+            document.getElementById("result").textContent="you win";
         }else if(computerChoice=='scissor'){
-            console.log('You lost this round');
-            computerScore++;
+            document.getElementById("result").textContent="you lose";
         }else{
-            console.log('it\'s a tie');
+            document.getElementById("result").textContent="it's a tie";
         }
     }else if(playerChoice=='scissor'){
         if(computerChoice=='paper'){
-            console.log('You won this round');
-            playerScore++;
+            document.getElementById("result").textContent="you win";
         }else if(computerChoice=='rock'){
-            console.log('You lost this round');
-            computerScore++;
+            document.getElementById("result").textContent="you lose";
         }else{
-            console.log('it\'s a tie');
+            document.getElementById("result").textContent="it's a tie";
         }
-    }else{
-        console.log('wrong input type one of the following \n rock, paper, scissor');
-        console.log('computer is awarded as winner of this round');
-        computerScore++;
     }
-    i++;
-}
-console.log(`Your score : ${playerScore}\nComputer score : ${computerScore}`);
-if(playerScore>computerScore){
-    console.log('You Win');
-}else if(playerScore<computerScore){
-    console.log('You lose');
-}else{
-    console.log('it\'s a tie try again');
 }
